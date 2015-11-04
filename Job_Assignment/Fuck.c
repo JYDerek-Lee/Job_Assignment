@@ -62,24 +62,17 @@ int prec(char op) {
 
 int eval(int p_len, char p_num[][20]) { // 계산
 	int op1 = 0, op2 = 0, value = 0, i = 0, j = 0;
-	//char *ch=(char*)calloc(20,sizeof(char));
-	char ch[10][20] = { 0 };
 	StackType s;
 
-	for (i = 0; i < p_len; i++) {
-		strcpy(ch[i], p_num[i]);
-	}
-	
 	init(&s);
 	for (i = 0; i<p_len; i++) {
 		char temp[20] = { 0 };
 		char m_temp = NULL;
-		strcpy(temp, ch[i]);
-		m_temp = temp[0];
+		strcpy(temp, p_num[i]);
 
+		m_temp = temp[0];
 		if (m_temp != '+' && m_temp != '-' && m_temp != '*' && m_temp != '/') {
-			value = atoi(temp);
-			//value = (int)(*temp) - '0';   // 입력이 피연산자이면
+			value = atoi(temp); // 입력이 피연산자이면
 			push(&s, value);
 		}
 		else {   //연산자이면 피연산자를 스택에서 제거
@@ -148,19 +141,12 @@ void infix_to_postfix(char p_exp[]) {
 		printf("%c", num[i]);
 	}
 	printf("\n");
-	
-	/*
-	i = 0;
-	while (i<j+1) {
-		strcat(send, num[i]);
-		i++;
-	}
-	*/
+
 	int re = eval(j+1, num);
 	printf("%d", re);
 }
 
-main() {
+void main() {
 	char str[50] = {"(2+10)*2"};
 
 	printf("수식을 입력하세요 : ");
